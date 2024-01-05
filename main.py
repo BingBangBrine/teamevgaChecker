@@ -1,16 +1,46 @@
-# This is a sample Python script.
+import re
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+while (True):
+    # sees what the username is
+    print('To determine vowels, evens or odds.\nMust enter a username.\nEnter username:', end=' ')
+    username = ""
+    while (username == "" or username == " "):
+        username = str(input())
+        if (username == ""):
+            print('Must enter a username.')
+        if (username == " "):
+            print('Must enter a username.')
 
+    # removes any character that is NOT in the alphabet like underscores or numbers
+    vowelUsername = ''
+    vowelUsername = re.sub("[^A-Za-z]", "", username)
+    firstCharacter = vowelUsername[0]
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    # checks if clean username is vowels
+    isVowel = False
+    vowels = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"]
+    for i in vowels:
+        if (firstCharacter == i):
+            isVowel = True
 
+    # removes spaces from username for counting odds/evens
+    usernameNoSpaces = ''
+    usernameNoSpaces = re.sub(" ", "", username)
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+    # finds how many characters username has and if even or odd
+    isOdds = False
+    isEvens = False
+    usernameLength = len(usernameNoSpaces)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    if (usernameLength % 2 == 0):
+        isEvens = True
+    else:
+        isOdds = True
+
+    # print the answers
+    if (isVowel == True):
+        print(f'{username} is vowels. ({usernameLength})\n')
+    elif (isEvens == True):
+        print(f'{username} is evens. ({usernameLength})\n')
+    elif (isOdds == True):
+        print(f'{username} is odds. ({usernameLength})\n')
